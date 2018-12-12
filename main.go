@@ -95,6 +95,7 @@ func (c *client) disableAuthz(url string) error {
 		Status:   "deactivated",
 	})
 	if err != nil {
+		log.Info("Called")
 		return err
 	}
 
