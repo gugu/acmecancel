@@ -77,7 +77,7 @@ func newClient(ks string, ns jose.NonceSource) (*client, error) {
 		},
 	}
 
-	signer, err := jose.NewSigner(jose.RS256, priv)
+	signer, err := jose.NewSigner(jose.RS512, priv)
 	if err != nil {
 		return nil, err
 	}
