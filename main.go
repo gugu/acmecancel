@@ -68,7 +68,7 @@ func newClient(ks string, ns jose.NonceSource) (*client, error) {
 	if err := json.Unmarshal([]byte(ks), &reg); err != nil {
 		return nil, err
 	}
-	priv := &ecdsa.PrivateKey{
+	priv := &rsa.PrivateKey{
 		D: reg.D,
 		PublicKey: rsa.PublicKey{
 			N:     reg.N,
