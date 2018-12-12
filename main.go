@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"crypto/rsa"
-	"crypto/elliptic"
 	"encoding/json"
 	"errors"
 	"flag"
