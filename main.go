@@ -101,6 +101,7 @@ func (c *client) disableAuthz(url string) error {
 
 	signed, err := c.signer.Sign(b)
 	if err != nil {
+		log.Println("Called1")
 		return err
 	}
 	buf := bytes.NewBuffer([]byte(signed.FullSerialize()))
