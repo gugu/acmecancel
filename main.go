@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"crypto/ecdsa"
+	"crypto/rsa"
 	"crypto/elliptic"
 	"encoding/json"
 	"errors"
@@ -64,21 +64,20 @@ type client struct {
 
 func newClient(ks string, ns jose.NonceSource) (*client, error) {
 	var reg struct {
-		X, Y, D *big.Int
+		N, E, D *big.Int
 	}
 	if err := json.Unmarshal([]byte(ks), &reg); err != nil {
 		return nil, err
 	}
 	priv := &ecdsa.PrivateKey{
 		D: reg.D,
-		PublicKey: ecdsa.PublicKey{
-			X:     reg.X,
-			Y:     reg.Y,
-			Curve: elliptic.P256(),
+		PublicKey: rsa.PublicKey{
+			N:     reg.N,
+			E:     reg.E,
 		},
 	}
 
-	signer, err := jose.NewSigner(jose.ES256, priv)
+	signer, err := jose.NewSigner(jose.RS256, priv)
 	if err != nil {
 		return nil, err
 	}
