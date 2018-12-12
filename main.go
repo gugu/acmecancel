@@ -63,7 +63,8 @@ type client struct {
 
 func newClient(ks string, ns jose.NonceSource) (*client, error) {
 	var reg struct {
-		N, E, D *big.Int
+		N, D *big.Int
+		E int
 	}
 	if err := json.Unmarshal([]byte(ks), &reg); err != nil {
 		return nil, err
